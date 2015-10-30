@@ -1,0 +1,106 @@
+<html lang="en" ng-app="barista">
+  <head>
+
+    <title>barista-matic</title>
+
+    <base href="/">
+
+    <link rel="stylesheet" type="text/css" href="/bower_components/base/dist/style.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/src/css/style.css" />
+    <meta name="viewport" content="initial-scale=1" />
+
+    <script src="/jspm_packages/system.js"></script>
+    <script src="/config.js"></script>
+    <script>
+      System.import('./src/app');
+    </script>
+
+  </head>
+  <body ng-controller="MainCtrl as main" ng-cloak>
+      <header id="header" class="light-shadow">
+
+        <nav id="header-nav" style="margin:10px; padding:10px;" class="right" >
+          <button class="button left block" ng-click="main.reStock()" style="margin-top:-12px;">STOCK</button>
+        </nav>
+
+        <div id="header-logo" class="left">
+
+          <a ng-click="main.setDirections()">
+            <h2 style="margin:10px; color:#ffffff; display:inline-block">Barista-matic</h2>
+          </a>
+
+        </div>
+
+      </header>
+
+          <div id="main-menu" class="light-shadow menu">
+            <div>
+              <a class="slide-anchor" >
+                <span class="menu-span">
+                  <h5 class="padding center-element">MENU</h5>
+                </span>
+              </a>
+
+              <a ng-repeat="d in main.menuService.menu" ng-click="main.setDrink(d.drink.id)" class="slide-anchor" ng-class="d.qty == 0 ? 'disabled' : '' ">
+                <span class="menu-span">
+                  <span class="strong block right padding"> {{ d.qty }}</span>
+                  <h5 class="left padding">{{ d.drink.name }} | {{ d.drink.price | currency }}</h5>
+                </span>
+              </a>
+
+            </div>
+          </div>
+
+          <div id="right-menu" class="light-shadow menu">
+            <div>
+
+              <a class="slide-anchor">
+                <span class="menu-span">
+                  <h5 class="padding center-element">INVENTORY</h5>
+                </span>
+              </a>
+
+              <a ng-repeat="i in main.ingredients"  class="slide-anchor">
+                <span class="menu-span">
+                  <span class="strong block right padding"> {{ main.inventoryService.inventory[i.id]}}</span>
+                  <h5 class="left padding">{{ i.name }} | {{ i.price | currency }}</h5>
+                </span>
+              </a>
+
+            </div>
+          </div>
+
+
+        <div class="row" style="margin-right:0; margin-left:0;">
+          <section class="col-2" style="border:1px solid #202020">
+          </section>
+          <section id="content-container" class="col-8">
+            <div class="card light-shadow center-element">
+              <div ng-if="main.directions != null">
+                <h1>Barista-matic</h1>
+                <h2>How to use:<h2>
+                <span>
+                  Select a drink from the left menu.
+                  Once selected, click the "order" button in the middle of the screen, and enjoy!  You may restock the ingredient inventory
+                  by clicking the "Stock" button in the top right.
+                </span>
+              </div>
+              <div ng-if="main.drink != null">
+
+                <div class="row" style="margin:0;">
+                  <h2 class="inline-block">{{ main.getDrink(main.drink).drink.name }} | </h2>
+                  <h3 class="inline-block">{{ main.getDrink(main.drink).drink.price | currency }} </h3>
+                </div>
+                <div class="row" style="margin:0;">
+                  <button class="button right" ng-click="main.buyDrink( main.getDrink(main.drink) )">Buy Drink</button>
+                </div>
+
+              </div>
+            </div>
+          </section>
+          <section class="col-2" style="border:1px solid #202020">
+          </section>
+        </div>
+  </body>
+</html>

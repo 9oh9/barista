@@ -1,0 +1,19 @@
+{
+  "name": "baristamatic",
+  "version": "0.0.0",
+  "authors": [
+    "nineohnine <rotzbrent@gmail.com>"
+  ],
+  "description": "Baristamatic",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "base": "~2.6.1"
+  }
+}

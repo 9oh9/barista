@@ -1,5 +1,4 @@
 import angular from 'angular';
-import 'angular-ui-router';
 import { MainCtrl } from 'src/components/controllers'
 import { InventoryService, ApiService, MenuItemService, MenuService } from 'src/components/services'
 
